@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dglp37e37ldve"]
+
+[ext_resource type="Script" path="res://examples/mmo_player/mmo_player.gd" id="1_ypca8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_816xn"]
+radius = 0.3
+height = 1.7
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wivh3"]
+radius = 0.3
+height = 1.7
+
+[sub_resource type="SphereMesh" id="SphereMesh_eojv2"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gusvg"]
+radius = 0.1
+
+[node name="MMOPlayer" type="CharacterBody3D"]
+script = ExtResource("1_ypca8")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_816xn")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Mesh1" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("CapsuleMesh_wivh3")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.2)
+mesh = SubResource("SphereMesh_eojv2")
+
+[node name="CameraPivotY" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="CameraPivotX" type="Node3D" parent="CameraPivotY"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0, 0)
+
+[node name="SpringArm" type="SpringArm3D" parent="CameraPivotY/CameraPivotX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.368619, 0.258109)
+shape = SubResource("SphereShape3D_gusvg")
+spring_length = 6.0
+
+[node name="Camera" type="Camera3D" parent="CameraPivotY/CameraPivotX/SpringArm"]
+current = true
+fov = 80.0

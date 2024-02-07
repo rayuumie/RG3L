@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckmc7me4tam8x"]
+
+[ext_resource type="Script" path="res://examples/navmesh_player/navmesh_player.gd" id="1_c40sp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_evhaj"]
+radius = 0.3
+height = 1.7
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mxmaj"]
+radius = 0.3
+height = 1.7
+
+[sub_resource type="SphereMesh" id="SphereMesh_1slb7"]
+radius = 0.2
+height = 0.4
+
+[node name="NavmeshPlayer" type="CharacterBody3D"]
+script = ExtResource("1_c40sp")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CapsuleShape3D_evhaj")
+
+[node name="SpringArm" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 1.80449, 0)
+spring_length = 10.0
+
+[node name="Camera" type="Camera3D" parent="SpringArm"]
+current = true
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Mesh1" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("CapsuleMesh_mxmaj")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.3, 0.252354)
+mesh = SubResource("SphereMesh_1slb7")
+
+[node name="NavigationAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_height_offset = 0.25
