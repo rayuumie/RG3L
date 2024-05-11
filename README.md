@@ -1,10 +1,10 @@
 # Rayuumie's Godot 3D Library (RG3L)
-### Repo: https://github.com/rayuumie/RG3L
-### Godot 4.2.1
+A library of GDScript codes for 3D projects, which are written in a simple way and are easy to adapt.
 
-### Why?
-Every developer writes and organize code in a different way, and games have different needs.
-The objective here is to provide 3D code examples, that are written in a simple way and easy to adapt.
+
+### Version
+- [Godot Engine](https://godotengine.org/), 4.3 (Dev 6).
+
 
 ### Content
 * Demo: https://youtu.be/Ruc7xOEmD5I
@@ -17,5 +17,11 @@ The objective here is to provide 3D code examples, that are written in a simple 
 	* Area3D interaction
 	* Raycast from mouse position to world
 
-### Donation (Thank you ❤)
-Ko-fi: https://ko-fi.com/rayuumie
+	
+### Support
+Any donation is appreciated and will be of great help.
+- [Ko-fi](https://ko-fi.com/rayuumie)
+- [itch-io](https://rayuumie.itch.io/)
+
+
+Copyright (c) Rafael "Rayuumie" Pimenta, MIT license, 2024-present.
