@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8vmqds07wfpl"]
+
+[ext_resource type="Script" path="res://Examples/AreaInteractable/AreaInteractable.gd" id="1_ttaa7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o84hv"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_j6amm"]
+
+[node name="AreaInteractable" type="Area3D"]
+script = ExtResource("1_ttaa7")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_o84hv")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_j6amm")
