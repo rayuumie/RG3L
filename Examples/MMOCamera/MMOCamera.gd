@@ -21,7 +21,7 @@ extends CharacterBody3D
 @onready var _cameraPivotY: Node3D = $CameraPivotY
 @onready var _cameraPivotX: Node3D = $CameraPivotY/CameraPivotX
 @onready var _springArm: SpringArm3D = $CameraPivotY/CameraPivotX/SpringArm
-@onready var _model: Node3D = $Model
+@onready var _model: Node3D = $RogueCharacter
 @onready var _jumpCounter: int = numberOfJumps
 
 const HalfPI: float = PI / 2

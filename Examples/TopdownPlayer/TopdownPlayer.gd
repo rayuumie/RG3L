@@ -9,7 +9,7 @@ extends CharacterBody3D
 @export var rotationSpeed: float = 0.1
 
 @onready var _jumpCounter: int = numberOfJumps
-@onready var _model: Node3D = $Model
+@onready var _model: Node3D = $RogueCharacter
 @onready var _springArm: SpringArm3D = $SpringArm
 
 const HalfPI: float = PI / 2

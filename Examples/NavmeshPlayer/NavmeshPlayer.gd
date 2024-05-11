@@ -6,8 +6,7 @@ extends CharacterBody3D
 @export var rotationSpeed: float = 0.1
 
 
-# PRIVATE
-@onready var _model: Node3D = $Model
+@onready var _model: Node3D = $RogueNavmeshCharacter
 @onready var _springArm: SpringArm3D = $SpringArm
 @onready var _spaceState = get_world_3d().direct_space_state
 @onready var _camera: Camera3D = $SpringArm/Camera
@@ -42,10 +41,12 @@ func _physics_process(_delta: float) -> void:
 
 	# Movement
 	if _navigationAgent.is_navigation_finished():
+		velocity = Vector3.ZERO
+		move_and_slide()
 		return
 
 	var nextPathPosition: Vector3 = _navigationAgent.get_next_path_position()
-	var newVelocity: Vector3 = global_position.direction_to(nextPathPosition) * speed
+	var newVelocity: Vector3 = global_position.direction_to(nextPathPosition).normalized() * speed
 
 	if _navigationAgent.avoidance_enabled:
 		_navigationAgent.set_velocity(newVelocity)
@@ -59,6 +60,7 @@ func setMovementTarget(movement_target: Vector3) -> void:
 
 func _onVelocityComputed(safeVelocity: Vector3) -> void:
 	velocity = safeVelocity
+
 	move_and_slide()
 
 	# Rotate the character

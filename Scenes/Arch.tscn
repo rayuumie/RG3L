@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://6t45qc3h0b17"]
+
+[ext_resource type="Material" uid="uid://wecqq4n6n7ru" path="res://Materials/Plataform.material" id="1_xkhqm"]
+
+[node name="Arch" type="CSGCombiner3D"]
+material_override = ExtResource("1_xkhqm")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+size = Vector3(14, 7, 4)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0)
+operation = 2
+radius = 3.813
+height = 5.0
+sides = 12
+smooth_faces = false

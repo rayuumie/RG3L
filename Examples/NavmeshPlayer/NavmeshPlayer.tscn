@@ -1,18 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckmc7me4tam8x"]
+[gd_scene load_steps=4 format=3 uid="uid://ckmc7me4tam8x"]
 
 [ext_resource type="Script" path="res://Examples/NavmeshPlayer/NavmeshPlayer.gd" id="1_c40sp"]
+[ext_resource type="PackedScene" uid="uid://cwtgvhjnas5q3" path="res://RogueCharacter/RogueNavmeshCharacter.tscn" id="2_ufb1e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_evhaj"]
 radius = 0.3
 height = 1.7
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_mxmaj"]
-radius = 0.3
-height = 1.7
-
-[sub_resource type="SphereMesh" id="SphereMesh_1slb7"]
-radius = 0.2
-height = 0.4
 
 [node name="NavmeshPlayer" type="CharacterBody3D"]
 script = ExtResource("1_c40sp")
@@ -21,6 +14,12 @@ script = ExtResource("1_c40sp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_evhaj")
 
+[node name="NavigationAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.5
+target_desired_distance = 0.5
+path_height_offset = 0.25
+debug_enabled = true
+
 [node name="SpringArm" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 1.80449, 0)
 spring_length = 10.0
@@ -28,17 +27,51 @@ spring_length = 10.0
 [node name="Camera" type="Camera3D" parent="SpringArm"]
 current = true
 
-[node name="Model" type="Node3D" parent="."]
+[node name="RogueNavmeshCharacter" parent="." instance=ExtResource("2_ufb1e")]
 
-[node name="Mesh1" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
-mesh = SubResource("CapsuleMesh_mxmaj")
+[node name="Skeleton3D" parent="RogueNavmeshCharacter/Rogue/Rig" index="0"]
+bones/1/position = Vector3(0, 0.386354, 0)
+bones/4/rotation = Quaternion(-0.555614, -0.0630747, -0.654287, 0.50914)
+bones/5/rotation = Quaternion(1.81336e-08, -6.36558e-08, -0.47767, 0.87854)
+bones/7/rotation = Quaternion(-0.317852, -0.326124, 0.136517, 0.879759)
+bones/8/rotation = Quaternion(0.0013778, 0.00137778, -0.70203, 0.712144)
+bones/10/rotation = Quaternion(-0.614744, 0.0829968, 0.627199, 0.470981)
+bones/11/rotation = Quaternion(1.02974e-08, 4.76589e-08, 0.501675, 0.865056)
+bones/13/rotation = Quaternion(-0.316214, 0.300379, -0.218126, 0.873042)
+bones/14/rotation = Quaternion(0.00282446, 0.00332679, 0.704167, 0.710021)
+bones/21/rotation = Quaternion(0.993023, 0.0832053, 0.0753149, 0.0362035)
+bones/22/rotation = Quaternion(0.261379, 6.4856e-08, -1.82252e-07, 0.965236)
+bones/23/rotation = Quaternion(-0.551746, -0.207348, 0.0538326, 0.806031)
+bones/25/rotation = Quaternion(0.995957, -0.0305311, 0.0310205, 0.0785805)
+bones/26/rotation = Quaternion(0.324264, -6.26768e-08, 2.25732e-07, 0.945967)
+bones/27/rotation = Quaternion(-0.585779, 0.114121, -0.0128664, 0.802293)
+bones/44/position = Vector3(0.520841, 0.775829, -0.0576374)
+bones/46/position = Vector3(-0.510844, 0.775829, 0.0597369)
 
-[node name="Mesh2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.3, 0.252354)
-mesh = SubResource("SphereMesh_1slb7")
+[node name="Knife_Offhand" parent="RogueNavmeshCharacter/Rogue/Rig/Skeleton3D" index="0"]
+transform = Transform3D(1.29613e-06, 0.262864, 0.964832, 0.999889, -0.0143037, 0.00389598, 0.0148251, 0.964726, -0.262835, 0.507545, 0.623539, -0.0197861)
 
-[node name="NavigationAgent" type="NavigationAgent3D" parent="."]
-path_desired_distance = 0.1
-target_desired_distance = 0.1
-path_height_offset = 0.25
+[node name="1H_Crossbow" parent="RogueNavmeshCharacter/Rogue/Rig/Skeleton3D" index="1"]
+transform = Transform3D(0.987359, -0.158482, 0.00197945, 0.000674709, -0.00828329, -0.999964, 0.158493, 0.987327, -0.0080721, -0.489621, 0.732364, 0.0959687)
+
+[node name="2H_Crossbow" parent="RogueNavmeshCharacter/Rogue/Rig/Skeleton3D" index="2"]
+transform = Transform3D(0.987359, -0.158482, 0.00197945, 0.000674709, -0.00828329, -0.999964, 0.158493, 0.987327, -0.0080721, -0.489621, 0.732364, 0.0959687)
+
+[node name="Knife" parent="RogueNavmeshCharacter/Rogue/Rig/Skeleton3D" index="3"]
+transform = Transform3D(-0.00197944, -0.158482, 0.987359, 0.999964, -0.00828315, 0.00067473, 0.00807195, 0.987327, 0.158493, -0.491056, 0.627654, 0.105351)
+
+[node name="Throwable" parent="RogueNavmeshCharacter/Rogue/Rig/Skeleton3D" index="4"]
+transform = Transform3D(-0.00197943, -0.158482, 0.987359, 0.999964, -0.00828313, 0.000674715, 0.00807193, 0.987327, 0.158493, -0.519622, 0.626161, 0.283313)
+
+[node name="Rogue_Cape" parent="RogueNavmeshCharacter/Rogue/Rig/Skeleton3D" index="5"]
+transform = Transform3D(0.996275, -5.14962e-09, 0.0862353, 5.13043e-09, 1, 4.44077e-10, -0.0862353, 1.88007e-15, 0.996275, -4.17227e-09, 1.19656, 1.52591e-15)
+
+[node name="AnimationTree" parent="RogueNavmeshCharacter" index="1" node_paths=PackedStringArray("character")]
+parameters/current_position = 0.897809
+parameters/current_delta = 0.018525
+parameters/Idle/current_position = 0.897809
+parameters/Idle/current_delta = 0.018525
+character = NodePath("../..")
+
+[editable path="RogueNavmeshCharacter"]
+[editable path="RogueNavmeshCharacter/Rogue"]

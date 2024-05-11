@@ -18,7 +18,7 @@ extends CharacterBody3D
 @onready var _cameraPivotY: Node3D = $CameraPivotY
 @onready var _cameraPivotX: Node3D = $CameraPivotY/CameraPivotX
 @onready var _springArm: SpringArm3D = $CameraPivotY/CameraPivotX/SpringArm
-@onready var _model: Node3D = $Model
+@onready var _model: Node3D = $RogueCharacter
 @onready var _jumpCounter: int = numberOfJumps
 
 
@@ -54,15 +54,13 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-
-		# Rotates the Model only when theres Directional Input, allowing the Player to see the front
-		# of the Character, when not inputing movement.
-		_model.rotation.y = lerp_angle(_model.rotation.y, _cameraPivotY.rotation.y, rotationSpeed)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
+
+	_model.rotation.y = lerp_angle(_model.rotation.y, _cameraPivotY.rotation.y, rotationSpeed)
 
 	if _jumpCounter < numberOfJumps and is_on_floor():
 		_jumpCounter = numberOfJumps
