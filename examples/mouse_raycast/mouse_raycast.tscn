@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://5i66oprubaqy"]
+
+[ext_resource type="Script" path="res://examples/mouse_raycast/mouse_raycast.gd" id="1_8jg50"]
+
+[node name="MouseRaycast" type="Node3D"]
+script = ExtResource("1_8jg50")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+
+[node name="Camera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+current = true

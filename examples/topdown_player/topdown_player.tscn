@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://3p5tbygat322"]
+
+[ext_resource type="Script" path="res://examples/topdown_player/topdown_player.gd" id="1_ng0bf"]
+[ext_resource type="PackedScene" uid="uid://bq5sj2dad6d3n" path="res://scenes/rogue_character/rogue.tscn" id="2_yy8sm"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://bf1pqek0a6lsq" path="res://scenes/rogue_character/rogue_state_machine.tres" id="3_4s3ug"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7r4wa"]
+radius = 0.35
+height = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_83146"]
+radius = 0.2
+
+[node name="TopdownPlayer" type="CharacterBody3D"]
+script = ExtResource("1_ng0bf")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_7r4wa")
+
+[node name="SpringArm" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 2.40449, 0.8)
+shape = SubResource("SphereShape3D_83146")
+spring_length = 10.0
+
+[node name="Camera" type="Camera3D" parent="SpringArm"]
+current = true
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Rogue" parent="Model" instance=ExtResource("2_yy8sm")]
+transform = Transform3D(1, 0, 0, 0, 0.990268, 0.139173, 0, -0.139173, 0.990268, 0, 0, 0.157638)
+
+[node name="AnimationTree" parent="Model/Rogue" index="2" node_paths=PackedStringArray("character")]
+tree_root = ExtResource("3_4s3ug")
+parameters/current_length = 1.04167
+parameters/current_position = 0.412225
+parameters/current_delta = 0.0138889
+parameters/End/current_length = null
+parameters/End/current_position = null
+parameters/End/current_delta = null
+parameters/Idle/current_length = 1.04167
+parameters/Idle/current_position = 0.412225
+parameters/Idle/current_delta = 0.0138889
+parameters/Idle/Animation/current_length = 1.04167
+parameters/Idle/Animation/current_position = 0.412225
+parameters/Idle/Animation/current_delta = 0.0138889
+parameters/Idle/output/current_length = 1.04167
+parameters/Idle/output/current_position = 0.412225
+parameters/Idle/output/current_delta = 0.0138889
+parameters/JumpIdle/current_length = null
+parameters/JumpIdle/current_position = null
+parameters/JumpIdle/current_delta = null
+parameters/JumpIdle/Animation/current_length = null
+parameters/JumpIdle/Animation/current_position = null
+parameters/JumpIdle/Animation/current_delta = null
+parameters/JumpIdle/output/current_length = null
+parameters/JumpIdle/output/current_position = null
+parameters/JumpIdle/output/current_delta = null
+parameters/Running/current_length = null
+parameters/Running/current_position = null
+parameters/Running/current_delta = null
+parameters/Running/Animation/current_length = null
+parameters/Running/Animation/current_position = null
+parameters/Running/Animation/current_delta = null
+parameters/Running/output/current_length = null
+parameters/Running/output/current_position = null
+parameters/Running/output/current_delta = null
+parameters/Start/current_length = 0.0
+parameters/Start/current_position = 0.0
+parameters/Start/current_delta = 0.0
+character = NodePath("../../..")
+
+[editable path="Model/Rogue"]

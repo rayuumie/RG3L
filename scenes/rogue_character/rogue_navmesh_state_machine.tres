@@ -1,0 +1,59 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=12 format=3 uid="uid://ij8q6epcs6d1"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m7or4"]
+animation = &"cheer"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mqy6t"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_m7or4")
+nodes/Animation/position = Vector2(100, 140)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tj0pe"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_mi4qd"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_tj0pe")
+nodes/Animation/position = Vector2(80, 140)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ns4s"]
+animation = &"running_a"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ep0ri"]
+graph_offset = Vector2(-201, 7)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_0ns4s")
+nodes/Animation/position = Vector2(60, 140)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fawqv"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n7o00"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "character.velocity.length() > 0.0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2s15q"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "character.velocity.is_zero_approx()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ncoxo"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvoum"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "character.velocity.length() > 0.0"
+
+[resource]
+states/Cheer/node = SubResource("AnimationNodeBlendTree_mqy6t")
+states/Cheer/position = Vector2(511, 168)
+states/Idle/node = SubResource("AnimationNodeBlendTree_mi4qd")
+states/Idle/position = Vector2(343, 100)
+states/Running/node = SubResource("AnimationNodeBlendTree_ep0ri")
+states/Running/position = Vector2(343, 260)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_fawqv"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_n7o00"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_2s15q"), "Cheer", "Idle", SubResource("AnimationNodeStateMachineTransition_ncoxo"), "Cheer", "Running", SubResource("AnimationNodeStateMachineTransition_pvoum")]
+graph_offset = Vector2(-118, 40)

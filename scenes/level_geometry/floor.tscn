@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ls235eqa3gjl"]
+
+[ext_resource type="Material" uid="uid://b3pgwuuev2d7b" path="res://materials/checkered_dark.material" id="1_byhxf"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xuurr"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5hw3v"]
+material = ExtResource("1_byhxf")
+size = Vector2(500, 500)
+
+[node name="Floor" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("WorldBoundaryShape3D_xuurr")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_5hw3v")
